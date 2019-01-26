@@ -10,13 +10,24 @@ const expect = (exp) => matchers(exp)
 const matchers = (exp) => ({
   toEqual: (assertion) => {
     if (exp === assertion) {
-      console.log(`${exp} is equal to ${assertion}`)
+      console.log(`${exp} is equal to ${assertion}`, 'color: limegreen')
       return true
     } else {
-      console.log(`${exp} is not equal to ${assertion}`)
+      console.log(`${exp} is not equal to ${assertion}`, 'color: red')
       return false
     }
   },
+
+  toContain: (assertion) => {
+    if (exp.includes(assertion)) {
+      console.log(`%c  ${exp} includes ${assertion}`, 'color: limegreen')
+      return true
+    } else {
+      console.log(`%c  ${exp} includes ${assertion}`, 'color: red')
+      return false
+    }
+  },
+
   
   toThrowError: (error) => {
     try {
@@ -28,9 +39,9 @@ const matchers = (exp) => ({
     finally {
        var errorText = 'Error: ' + error
        if (errorText === caughtErrorText) {
-       console.log(`"${caughtErrorText}" has been thrown!`)
+       console.log(`"${caughtErrorText}" has been thrown!`, 'color: limegreen')
        } else {
-        console.log(`"${caughtErrorText}" has not been thrown even though it should have been.`)
+        console.log(`"${caughtErrorText}" has not been thrown even though it should have been.`, 'color: red')
        }
    }
  }
